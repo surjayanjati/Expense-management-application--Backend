@@ -1,8 +1,10 @@
 /// Requiring The Module/Pakages--------------------------- ------------------------------------------------------------------>
 const mongoose=require("mongoose");
 const bcrypt=require("bcrypt");
+const jwt=require("jsonwebtoken");
 const validator=require("validator");
-
+/// Requiring The Secret Key From The Config Folder -------------------------------------------------------------------------->
+const secretKey=require("../config/secretKey");
 mongoose.set('strictQuery', true);
 /// Connecting To The Database with Mongooose -------------------------------------------------------------------------------->
 mongoose.connect("mongodb://localhost/expensemanagementsystem",()=>{
@@ -57,7 +59,11 @@ const userColectionSchema=new mongoose.Schema({
       immutable:true,
     } 
 });
-
+/// Creating The Token --------------------------------------------------------------------------------------------->
+userColectionSchema.methods=generateToken=(id)=>{
+      const token= jwt.sign({id:id},secretKey,{expiresIn:"2h"});
+      return token;
+}
 /// Hasing The Data Before Saving it into The Collection ----------------------------------------------------------->
 userColectionSchema.pre("save",async function(next){
     if(this.isModified("password")){

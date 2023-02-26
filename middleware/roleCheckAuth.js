@@ -3,7 +3,7 @@ const jwt=require("jsonwebtoken");
 /// Requiring The Secret Key From The Config Folder ----------------------------------------------------------------->
 const secretKey=require("../config/secretKey");
 /// Requiring The Company Collection From The Model ----------------------------------------------------------------->
-const CompanyCollection=require("../model/CompanyModel");
+const userCollections=require("../model/userModel");
 
 
 /// Function For Checking Whether The Token is exists and it has Some id in it or not--------------------------------->
@@ -35,7 +35,7 @@ async function roleCheck(req,res,next){
     const userId=req.userId;
     
     // Finding The Details of The User with userId________________________/
-    const userDetailsObj=await CompanyCollection.findOne({_id:userId});
+    const userDetailsObj=await userCollections.findOne({_id:userId});
     
     if(userDetailsObj!==null){
     req.userId=userId;

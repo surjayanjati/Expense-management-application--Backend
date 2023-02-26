@@ -19,7 +19,7 @@ app.use(cookie());      //:> Middleware For Using The Cookie //
 /// Requiring The Routes From The Route Folder --------------------------------------------------------->
 require("./routes/signupRoutes")(app)//:> Signup Route_____________//
 require("./routes/loginRoute")(app)  //:>Login Route_______________//
-
+require("./routes/settingsRoute")(app)//:>Setting Page Route_______//
 
 
 
